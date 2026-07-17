@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,19 +16,11 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
 
-// MODULES //
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
 
-var numelDimension = require( '@stdlib/ndarray-base-numel-dimension' );
-var getStride = require( '@stdlib/ndarray-base-stride' );
-var getOffset = require( '@stdlib/ndarray-base-offset' );
-var getData = require( '@stdlib/ndarray-base-data-buffer' );
-var strided = require( '@stdlib/blas-ext-base-dfill-not-equal' ).ndarray;
-var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
-
-
-// MAIN //
+import { float64ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
 * Replaces elements in a one-dimensional double-precision floating-point ndarray not equal to a provided search element with a specified scalar constant.
@@ -43,8 +35,8 @@ var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
 *
 * -   When comparing elements, the function checks for equality using the strict equality operator `===`. As a consequence, `NaN` values are considered distinct (i.e., as `NaN !== NaN` always evaluates to `true`, `NaN` elements are always replaced), and `-0` and `+0` are considered the same.
 *
-* @param {ArrayLikeObject<Object>} arrays - array-like object containing ndarrays
-* @returns {ndarray} input ndarray
+* @param arrays - array-like object containing ndarrays
+* @returns input ndarray
 *
 * @example
 * var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
@@ -63,19 +55,9 @@ var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
 * var out = dfillNotEqual( [ x, searchElement, alpha ] );
 * // returns <ndarray>[ 0.0, 5.0, 5.0, 0.0, 5.0, 5.0 ]
 */
-function dfillNotEqual( arrays ) {
-	var searchElement;
-	var alpha;
-	var x;
-
-	x = arrays[ 0 ];
-	searchElement = ndarraylike2scalar( arrays[ 1 ] );
-	alpha = ndarraylike2scalar( arrays[ 2 ] );
-	strided( numelDimension( x, 0 ), searchElement, alpha, getData( x ), getStride( x, 0 ), getOffset( x ) ); // eslint-disable-line max-len
-	return x;
-}
+declare function dfillNotEqual( arrays: [ float64ndarray, typedndarray<number>, typedndarray<number> ] ): float64ndarray;
 
 
 // EXPORTS //
 
-module.exports = dfillNotEqual;
+export = dfillNotEqual;
